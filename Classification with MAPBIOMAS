@@ -1,0 +1,16 @@
+
+var citycol7 = ee.FeatureCollection('projects/mapbiomas-workspace/AUXILIAR/ESTATISTICAS/COLECAO7/city').filterMetadata('name_pt_br','equals','Curitiba (PR)')
+
+var col7 = ee.Image('projects/mapbiomas-workspace/public/collection7/mapbiomas_collection70_integration_v2')
+
+
+Map.addLayer(citycol7);
+Map.addLayer(col7.clip(citycol7), imageVisParam3, 'MAPBIO7');
+
+Export.image.toDrive({
+  image:col7.clip(Curitiba),
+  description:'MapBio_Curitiba',
+  folder:'ArquivosGEE',
+  region:Curitiba.geometry().getInfo(),
+  scale:30,
+});
